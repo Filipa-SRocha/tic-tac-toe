@@ -2,3 +2,18 @@ body{
     background: darksalmon;
 }
 
+#game-area{
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    background: blue;
+
+}
+
+.cell{
+    background: deeppink;
+    border: 1px solid black;
+}
