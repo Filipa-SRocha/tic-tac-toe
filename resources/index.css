@@ -1,5 +1,5 @@
 body{
-    background: darksalmon;
+    background: rgb(45, 45, 46);
 }
 
 #game-area{
@@ -9,11 +9,16 @@ body{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    background: blue;
-
 }
 
 .cell{
-    background: deeppink;
-    border: 1px solid black;
+    background:rgb(45, 45, 46);
+}
+
+.grid-bottom{
+    border-bottom: 1px solid  rgb(192, 190, 190);
+}
+
+.grid-side{
+    border-right: 1px solid  rgb(192, 190, 190);;
 }
