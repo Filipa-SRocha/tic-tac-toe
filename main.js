@@ -9,7 +9,6 @@ const GameBoard = (function(){
 
     let checkIfFull= () => _gameBoard.every((element) => element !== "");
     
-    
     let updateGameBoard = () =>{
         _gameBoard = [];
         const cells= DomAccess.cells;
@@ -28,21 +27,34 @@ const GameBoard = (function(){
         });
     } 
     function setDisplay(player1, player2){
-        const display= document.querySelector("#display");
-        const infoBox= document.createElement("div");
-        infoBox.id="info-box";
-        infoBox.innerHTML=`<p id="first-p">${player1}, you are the X </p> 
-                            <p id="second-p">${player2}, you are the O </p>`;
-        display.appendChild(infoBox);
+
+        const p1Display= document.querySelector("#player1-display");
+        const p2Display= document.querySelector("#player2-display");
+        const infoBox1 = document.createElement("div");
+        const infoBox2 = document.createElement("div"); 
+        infoBox1.classList.add("info-box");
+        infoBox2.classList.add("info-box");
+
+        infoBox1.innerHTML=`<p id="first-p">${player1.toUpperCase()}, YOU ARE THE X </p>`;
+        infoBox2.innerHTML=`<p id="second-p">${player2.toUpperCase()}, YOU ARE THE O </p>`;
+        p1Display.appendChild(infoBox1);
+        p2Display.appendChild(infoBox2);
+
     }
 
     function reset(){
         _gameBoard= [];
         _displayGame();
-        const infoBox= document.querySelector("#info-box");
-        infoBox.remove();
-        inputForm=document.querySelector("#player-input");
-        inputForm.style.display="block";
+        const endGameDiv = document.querySelector("#end-game-div");
+        const submit = DomAccess.submit;
+        const infoBoxes= document.querySelectorAll(".info-box");
+        const playerInputs=DomAccess.playerInputs;
+
+        endGameDiv.remove()
+        infoBoxes.forEach(infoBox => infoBox.remove());
+        
+        submit.style.display="block";
+        playerInputs.forEach(playerInput => playerInput.style.display="block");
     }
 
     let render = _displayGame();
@@ -52,7 +64,7 @@ const GameBoard = (function(){
 
 
 const Game = (function(){
-    // get players
+  
     let _player1, _player2;
     let _turn;
     let getPlayerTurn;
@@ -60,15 +72,23 @@ const Game = (function(){
     function definePlayers(player1, player2){
         _player1= Player(player1, "X");
         _player2= Player(player2, "O");
-        _turn=_player2;
+        _turn=_player1;
         getPlayerTurn=_turn;
     }
 
     function togglePlayerTurn (){
+        p1=document.querySelector("#first-p");
+        p2=document.querySelector("#second-p");
+
         if (_turn == _player1){
             _turn=_player2;
+            p1.classList.remove("p-highlight");
+            p2.classList.add("p-highlight");
+
         }else{
             _turn=_player1
+            p2.classList.remove("p-highlight");
+            p1.classList.add("p-highlight");
         }
         return _turn;
     }
@@ -80,7 +100,6 @@ const Game = (function(){
             GameBoard.updateGameBoard();
             runChecks();
             getPlayerTurn= togglePlayerTurn();
-            
         }
 
     }
@@ -120,17 +139,21 @@ const Game = (function(){
         delete _player1;
         delete _player2;
         delete _turn;
+
     }
 
     function endGame(win){
-
-        const infoBox = document.querySelector("#info-box");
+        const textDiv= DomAccess.submitDiv;
         const endGameP = document.createElement("p");
+        const endGameDiv = document.createElement("div");
+        endGameDiv.id="end-game-div";
         const winText=`Game Over! ${getPlayerTurn.getPlayerName} won!`
         const fullText = "Game Over! It's a tie!"
-        win ? endGameP.textContent=winText : endGameP.textContent = fullText; 
-        
-        infoBox.appendChild(endGameP);
+        win ? endGameP.textContent=winText : endGameP.textContent = fullText;
+       
+        endGameDiv.appendChild(endGameP);
+        textDiv.appendChild(endGameDiv);
+        textDiv.style.display="block";
         DomAccess.cells.forEach(cell => {
             cell.removeEventListener("click", Game.setMark);
         })
@@ -143,7 +166,8 @@ const Game = (function(){
 
 const DomAccess = (function play(){
     const submit= document.querySelector("#submit");
-    const inputForm = document.querySelector("#player-input");
+    const submitDiv= document.querySelector("#div-submit-button");
+    const playerInputs = document.querySelectorAll(".player-input");
     const cells= document.querySelectorAll(".cell");
     const newGameButton = document.querySelector("#new-game");
 
@@ -156,9 +180,13 @@ const DomAccess = (function play(){
     submit.addEventListener("click", setGame);
 
     function setGame(){
-        inputForm.style.display="none";
+        playerInputs.forEach(playerInput => playerInput.style.display="none");
+        submit.style.display="none";
+        submitDiv.style.display="none";
+        
         let player1=document.querySelector("#player1").value;
         let player2=document.querySelector("#player2").value;
+
         GameBoard.setDisplay(player1, player2);
         Game.definePlayers(player1, player2);
         startGame();
@@ -170,5 +198,5 @@ const DomAccess = (function play(){
         });
     }    
     
-    return{cells}
+    return{cells, submitDiv, submit, playerInputs}
 })();

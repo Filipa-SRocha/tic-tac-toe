@@ -10,9 +10,8 @@
 </head>
 <body>
     <h1>Tic-Tac-Toe</h1>
-    <button id="new-game">New Game</button>
     <div id="pannel">
-        
+        <!-- >
         <div id="display">
             <div id=player-input>
                 <label>Player 1: </label>
@@ -28,6 +27,23 @@
             <button>Let's Play!</button>
 
         </div>
+        <-->
+        <div id="player1-display" class="display">
+            <div class="player-input">
+                <label>Player 1: </label>
+                <input type="text" id="player1" placeholder="Player1"required>
+            </div>
+        </div>
+        <div id=player2-display class="display">
+            <div class="player-input">
+                <label>Player 2: </label>
+                <input type="text" id="player2" placeholder="Player2" required>
+            </div>
+        </div>
+        
+        <div id="div-submit-button">
+            <button id="submit">Let's Play!</button>
+        </div>
         <div id="game-area">
             <div class="cell grid-bottom grid-side" data-idex="1"></div>
             <div class="cell grid-bottom grid-side" data-idex="2"></div>
@@ -40,6 +56,7 @@
             <div class="cell" data-idex="9"></div>
         </div>
     </div>
+    <button id="new-game">New Game</button>
     <script src="main.js"></script>
 </body>
 </html>

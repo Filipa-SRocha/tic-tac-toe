@@ -1,13 +1,45 @@
 body{
-    background: rgb(45, 45, 46);
+    background: rgb(45, 45, 46); 
     text-align: center;
 }
 
 h1{
-    text-align: center;
+    margin: 0 auto;
+    width: 170px;
     margin: 30px auto;
+    margin-left: 530px;
 }
 
+#div-submit-button{
+    background: rgba(22, 26, 22, 0.911);
+    width: 340px;
+    height: 150px;
+    margin: 95px 0;
+    grid-area: game;
+    position: relative;
+}
+
+#end-game-div{
+    width: 340px;
+    height: 50px;
+    margin: 50px auto;
+    color: white;
+    text-align: center;
+}
+
+#submit{
+    width: 99px;
+    height: 40px;
+    margin: 55px auto;
+    color:black;
+    background: darkolivegreen;
+    border: 2px solid rgb(31, 39, 17);;
+    border-radius: 10px;
+}
+
+#submit:hover{
+    background: rgb(43, 54, 24);
+}
 
 button{
     width: 90px;
@@ -19,11 +51,11 @@ button{
 button:focus{
     outline: none;
 }
-
+/*
 #new-game-form{
     width: 400px;
     height: 400px;
-    background: darkolivegreen;
+    background: rgb(226, 233, 213);
     margin: 0 auto;
     display:block;
     position: absolute;
@@ -31,19 +63,29 @@ button:focus{
 #new-game-form{
     display:none;
 }
-
-#display{
+*/
+.display, #info-box{
     width: 250px;
-    height: 170px;
-    margin: 10px 100px 0 0;
-    background: darkolivegreen;
-    display: inline-block;
+    height: 100px;
+    margin-top: 60px;
     text-align: center;
+    color: blanchedalmond;
+
 }
 
+#player1-display{
+    grid-area: player1;
+    margin-right: 30px;
+    margin-left:30px
+}
+
+#player2-display{
+    grid-area: player2;
+    margin-left: 30px;
+}
 
 #first-p{
-    color: white;
+    color: rgb(45, 154, 187);
     overflow: hidden;
     border-right: .15em solid orange;
     white-space: nowrap;
@@ -60,11 +102,15 @@ button:focus{
     border-right: .15em solid orange;
     white-space: nowrap;
     margin: 0 auto;
-    letter-spacing: .15em;
+    letter-spacing: .10em;
     opacity: 0;
     animation:
     typing2 3.5s steps(30, end) 3.5s forwards,
-    blink-caret .5s step-end 5s forwards;
+    blink-caret .5s step-end 10s forwards;
+}
+
+.p-highlight{
+    text-shadow: 1px 1px 8px rgba(255, 255, 255, 0.918);
 }
 
 @keyframes typing{
@@ -84,15 +130,9 @@ button:focus{
     100%{border-color: transparent;}
 }
 
-#player-input{
-    margin: 20 auto;
+.player-input{
+    margin: 0 auto;
     padding: 10px;
-}
-
-#info-box{
-    background: darkolivegreen;
-    width: 250px;
-    height: 170px;
 }
 
 input{
@@ -102,23 +142,11 @@ input{
     border: 1px solid rgb(31, 39, 17);
 }
 
-#submit{
-    width: 80px;
-    margin: 30px auto;
-    color:white;
-    background: darkolivegreen;
-    border: 2px solid rgb(31, 39, 17);;
-    border-radius: 10px;
-}
-
-#submit:hover{
-    background: rgb(43, 54, 24);
-}
-
 #game-area{
+    grid-area: game;
     width: 300px;
     height: 300px;
-    margin: 0 auto;
+    margin: 20px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -126,10 +154,10 @@ input{
 
 #pannel{
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 800px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "player1 game player2";
     height: 400px;
-    margin: 0 auto;
+    margin:30px;
 }
 
 .cell{
