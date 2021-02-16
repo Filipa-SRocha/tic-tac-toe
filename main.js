@@ -1,5 +1,4 @@
 const Player = (name, mark) =>{
-
     const getPlayerName = name;
     const getPlayerMark = mark;
     return {getPlayerName, getPlayerMark};
@@ -7,6 +6,15 @@ const Player = (name, mark) =>{
 
 const GameBoard = (function(){
     let _gameBoard= ["", "", "", "", "", "", "", "", ""];
+
+    function checkIfFull(){
+        if(_gameBoard.every((element) => element !== "")){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     
     let updateGameBoard = () =>{
         _gameBoard = [];
@@ -25,21 +33,43 @@ const GameBoard = (function(){
             i++;
         });
     } 
+    function setDisplay(player1, player2){
+        const display= document.querySelector("#display");
+        const infoBox= document.createElement("div");
+        infoBox.id="info-box";
+        infoBox.innerHTML=`<p id="first-p">${player1}, you are the X </p> 
+                            <p id="second-p">${player2}, you are the O </p>`;
+        display.appendChild(infoBox);
+    }
 
-
+    function reset(){
+        _gameBoard= ["", "", "", "", "", "", "", "", ""];
+        console.log(_gameBoard);
+        _displayGame();
+        const infoBox= document.querySelector("#info-box");
+        infoBox.remove();
+        inputForm=document.querySelector("#player-input");
+        inputForm.style.display="block";
+    }
 
     let render = _displayGame();
     const getBoard = () => _gameBoard;
-    return {getBoard, render, updateGameBoard};
+    return {getBoard, render, updateGameBoard, setDisplay, reset, checkIfFull};
 })();
 
 
 const Game = (function(){
     // get players
-    const _player1 = Player("filipa", "X");
-    const _player2 = Player("julianna", "O");
-    _turn = _player2;
-    let getPlayerTurn=_turn;
+    let _player1, _player2;
+    let _turn;
+    let getPlayerTurn;
+
+    function definePlayers(player1, player2){
+        _player1= Player(player1, "X");
+        _player2= Player(player2, "O");
+        _turn=_player2;
+        getPlayerTurn=_turn;
+    }
 
     function togglePlayerTurn (){
         if (_turn == _player1){
@@ -50,21 +80,32 @@ const Game = (function(){
         return _turn;
     }
 
+
     function setMark (){
         if (!this.textContent){
             this.textContent = getPlayerTurn.getPlayerMark;
-            getPlayerTurn= togglePlayerTurn();
+            console.log(`_turn: ${_turn.getPlayerName} getplayerturn: ${getPlayerTurn.getPlayerName}`);
             GameBoard.updateGameBoard();
+            runChecks();
+            getPlayerTurn= togglePlayerTurn();
+            
         }
-        console.log(victoryCheck());
+
+    }
+    function runChecks(){
+        let full = GameBoard.checkIfFull();
+        let win = victoryCheck();
+        if(full || win){
+            endGame([win, full]);
+        }    
     }
 
     function victoryCheck(){
         let mark= _turn.getPlayerMark;
         const victoryArrays=[
-            [1,2,3],[4,5,6],[7,8,9],
-            [1,4,7], [2,5,8], [3,6,9],
-            [1,5,9], [3,5,7]
+            [0,1,2],[3,4,5],[6,7,8],
+            [0,3,6], [1,4,7], [2,5,8],
+            [0,4,8], [2,4,6]
         ];
         let gameArray= GameBoard.getBoard();
         let victory=false;
@@ -76,30 +117,67 @@ const Game = (function(){
             testArray=[gameArray[i1], gameArray[i2], gameArray[i3]];
 
             victory = testArray.every((element)=> element===mark);
-           
-            if (victory){
-                endGame();
+            if(victory){
+                return victory;
             }
         }
         return victory;
     }
 
-    function endGame(){
-        console.log(`Game Over! ${getPlayerTurn.getPlayerName} won!`);
+    function reset(){
+        delete _player1;
+        delete _player2;
+        delete _turn;
+    }
+
+    function endGame(results){
+        win=results[0];
+
+        const infoBox = document.querySelector("#info-box");
+        const endGameP = document.createElement("p");
+        const winText=`Game Over! ${getPlayerTurn.getPlayerName} won!`
+        const fullText = "Game Over! It's a tie!"
+        win ? endGameP.textContent=winText : endGameP.textContent = fullText; 
+        
+        infoBox.appendChild(endGameP);
+        DomAccess.cells.forEach(cell => {
+            cell.removeEventListener("click", Game.setMark);
+        })
     }
 
 
-    return {getPlayerTurn, setMark, victoryCheck};
+    return {getPlayerTurn, setMark, victoryCheck, definePlayers};
 })();
 
 
-function play(){
+const DomAccess = (function play(){
+    const submit= document.querySelector("#submit");
+    const inputForm = document.querySelector("#player-input");
+    const cells= document.querySelectorAll(".cell");
+    const newGameButton = document.querySelector("#new-game");
 
-    let cells= document.querySelectorAll(".cell");
-    cells.forEach((cell) =>{
-        cell.addEventListener("click", Game.setMark);
-    });
     
-}
+    newGameButton.addEventListener("click", ()=>{
+        GameBoard.reset();
+        Game.reset();
+    });
 
-play();
+    submit.addEventListener("click", setGame);
+
+    function setGame(){
+        inputForm.style.display="none";
+        let player1=document.querySelector("#player1").value;
+        let player2=document.querySelector("#player2").value;
+        GameBoard.setDisplay(player1, player2);
+        Game.definePlayers(player1, player2);
+        startGame();
+    }
+
+    function startGame(){
+        cells.forEach((cell) =>{
+            cell.addEventListener("click", Game.setMark);
+        });
+    }    
+    
+    return{cells}
+})();

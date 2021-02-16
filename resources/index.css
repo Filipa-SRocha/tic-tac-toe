@@ -1,5 +1,118 @@
 body{
     background: rgb(45, 45, 46);
+    text-align: center;
+}
+
+h1{
+    text-align: center;
+    margin: 30px auto;
+}
+
+
+button{
+    width: 90px;
+    padding: 5px;
+    margin: 0 157px 60px;
+    background: rgb(47, 47, 51);
+    color: darkolivegreen;
+}
+button:focus{
+    outline: none;
+}
+
+#new-game-form{
+    width: 400px;
+    height: 400px;
+    background: darkolivegreen;
+    margin: 0 auto;
+    display:block;
+    position: absolute;
+}
+#new-game-form{
+    display:none;
+}
+
+#display{
+    width: 250px;
+    height: 170px;
+    margin: 10px 100px 0 0;
+    background: darkolivegreen;
+    display: inline-block;
+    text-align: center;
+}
+
+
+#first-p{
+    color: white;
+    overflow: hidden;
+    border-right: .15em solid orange;
+    white-space: nowrap;
+    margin: 10px auto;
+    letter-spacing: .15em;
+    animation: 
+    typing 3.5s steps(30, end),
+    blink-caret .5s step-end 5s forwards;
+}
+
+#second-p{
+    color: yellow;
+    overflow: hidden;
+    border-right: .15em solid orange;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .15em;
+    opacity: 0;
+    animation:
+    typing2 3.5s steps(30, end) 3.5s forwards,
+    blink-caret .5s step-end 5s forwards;
+}
+
+@keyframes typing{
+    from {width: 0}
+    to {width: 100%}
+}
+
+@keyframes typing2{
+    0% {width: 0; opacity: 0;}
+    1% {opacity:1;}
+    100% {width:100%; opacity: 1;}
+}
+
+@keyframes blink-caret{
+    0% {border-color: transparent;}
+    50% {border-color: orange;}
+    100%{border-color: transparent;}
+}
+
+#player-input{
+    margin: 20 auto;
+    padding: 10px;
+}
+
+#info-box{
+    background: darkolivegreen;
+    width: 250px;
+    height: 170px;
+}
+
+input{
+    margin: 5px auto;
+    border-radius: 10px;
+    background: rgb(43, 54, 24);
+    border: 1px solid rgb(31, 39, 17);
+}
+
+#submit{
+    width: 80px;
+    margin: 30px auto;
+    color:white;
+    background: darkolivegreen;
+    border: 2px solid rgb(31, 39, 17);;
+    border-radius: 10px;
+}
+
+#submit:hover{
+    background: rgb(43, 54, 24);
 }
 
 #game-area{
@@ -11,8 +124,21 @@ body{
     grid-template-rows: repeat(3, 1fr);
 }
 
+#pannel{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 800px;
+    height: 400px;
+    margin: 0 auto;
+}
+
 .cell{
     background:rgb(45, 45, 46);
+    color: burlywood;
+    text-align: center;
+    font-size: x-large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 30px;
 }
 
 .grid-bottom{
