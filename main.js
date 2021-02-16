@@ -7,18 +7,12 @@ const Player = (name, mark) =>{
 const GameBoard = (function(){
     let _gameBoard= ["", "", "", "", "", "", "", "", ""];
 
-    function checkIfFull(){
-        if(_gameBoard.every((element) => element !== "")){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+    let checkIfFull= () => _gameBoard.every((element) => element !== "");
+    
     
     let updateGameBoard = () =>{
         _gameBoard = [];
-        let cells= document.querySelectorAll(".cell");
+        const cells= DomAccess.cells;
         cells.forEach(cell =>{
             _gameBoard.push(cell.textContent);
         });
@@ -43,8 +37,7 @@ const GameBoard = (function(){
     }
 
     function reset(){
-        _gameBoard= ["", "", "", "", "", "", "", "", ""];
-        console.log(_gameBoard);
+        _gameBoard= [];
         _displayGame();
         const infoBox= document.querySelector("#info-box");
         infoBox.remove();
@@ -84,7 +77,6 @@ const Game = (function(){
     function setMark (){
         if (!this.textContent){
             this.textContent = getPlayerTurn.getPlayerMark;
-            console.log(`_turn: ${_turn.getPlayerName} getplayerturn: ${getPlayerTurn.getPlayerName}`);
             GameBoard.updateGameBoard();
             runChecks();
             getPlayerTurn= togglePlayerTurn();
@@ -96,7 +88,7 @@ const Game = (function(){
         let full = GameBoard.checkIfFull();
         let win = victoryCheck();
         if(full || win){
-            endGame([win, full]);
+            endGame(win);
         }    
     }
 
@@ -130,8 +122,7 @@ const Game = (function(){
         delete _turn;
     }
 
-    function endGame(results){
-        win=results[0];
+    function endGame(win){
 
         const infoBox = document.querySelector("#info-box");
         const endGameP = document.createElement("p");
@@ -146,7 +137,7 @@ const Game = (function(){
     }
 
 
-    return {getPlayerTurn, setMark, victoryCheck, definePlayers};
+    return {getPlayerTurn, setMark, victoryCheck, definePlayers, reset};
 })();
 
 
