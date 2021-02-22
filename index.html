@@ -11,27 +11,12 @@
 <body>
     <h1>Tic-Tac-Toe</h1>
     <div id="pannel">
-        <!-- >
-        <div id="display">
-            <div id=player-input>
-                <label>Player 1: </label>
-                <input type="text" id="player1" required>
-                <br>
-                <label>Player 2: </label>
-                <input type="text" id="player2" required>
-                <button id="submit">Let's Play</button>
-            </div>
-        </div>
-        <div id="new-game-form">
-            <h2>New Game!</h2>
-            <button>Let's Play!</button>
-
-        </div>
-        <-->
         <div id="player1-display" class="display">
             <div class="player-input">
                 <label>Player 1: </label>
                 <input type="text" id="player1" placeholder="Player1"required>
+            </div>
+            <div class="info-box" id="player1-info-box">
             </div>
         </div>
         <div id=player2-display class="display">
@@ -39,24 +24,31 @@
                 <label>Player 2: </label>
                 <input type="text" id="player2" placeholder="Player2" required>
             </div>
+            <div class="info-box" id="player2-info-box">
+            </div>
         </div>
         
         <div id="div-submit-button">
             <button id="submit">Let's Play!</button>
         </div>
+        <div id="end-game-div"></div>
         <div id="game-area">
-            <div class="cell grid-bottom grid-side" data-idex="1"></div>
-            <div class="cell grid-bottom grid-side" data-idex="2"></div>
-            <div class="cell grid-bottom" data-idex="3"></div>
-            <div class="cell grid-bottom grid-side" data-idex="4"></div>
-            <div class="cell grid-bottom grid-side" data-idex="5"></div>
-            <div class="cell grid-bottom" data-idex="6"></div>
-            <div class="cell grid-side" data-idex="7"></div>
-            <div class="cell grid-side" data-idex="8"></div>
-            <div class="cell" data-idex="9"></div>
+            <div class="cell grid-bottom grid-side" data-index="1"></div>
+            <div class="cell grid-bottom grid-side" data-index="2"></div>
+            <div class="cell grid-bottom" data-index="3"></div>
+            <div class="cell grid-bottom grid-side" data-index="4"></div>
+            <div class="cell grid-bottom grid-side" data-index="5"></div>
+            <div class="cell grid-bottom" data-index="6"></div>
+            <div class="cell grid-side" data-index="7"></div>
+            <div class="cell grid-side" data-index="8"></div>
+            <div class="cell" data-index="9"></div>
         </div>
     </div>
-    <button id="new-game">New Game</button>
+    <div id="buttons-panel">
+        <button id="humans-game">Human vs Human</button>
+        <button id="computer-game">Human vs Computer</button>
+        <button id="smartComputer-game"> (Coming Soon)</button>
+    </div>    
     <script src="main.js"></script>
 </body>
 </html>

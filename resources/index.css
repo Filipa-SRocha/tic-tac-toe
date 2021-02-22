@@ -1,5 +1,5 @@
 body{
-    background: rgb(45, 45, 46); 
+    background: rgb(54, 124, 115); 
     text-align: center;
 }
 
@@ -21,10 +21,16 @@ h1{
 
 #end-game-div{
     width: 340px;
-    height: 50px;
-    margin: 50px auto;
+    height: 150px;
     color: white;
     text-align: center;
+    padding: 50px;
+    position: fixed;
+    left: 410px;
+    top: -245px;
+    background: rgba(0, 0, 0, 0.603);
+    position: relative;
+    display: none;
 }
 
 #submit{
@@ -32,44 +38,42 @@ h1{
     height: 40px;
     margin: 55px auto;
     color:black;
-    background: darkolivegreen;
+    background:rgb(138, 121, 29);
     border: 2px solid rgb(31, 39, 17);;
     border-radius: 10px;
+    box-shadow: none;
 }
 
 #submit:hover{
-    background: rgb(43, 54, 24);
+    background: rgb(92, 81, 19);
 }
 
+#buttons-panel{
+    width: 600px;
+    position: absolute;
+    left: 310px;
+    align-items: center;
+}
 button{
-    width: 90px;
+    width: 150px;
     padding: 5px;
-    margin: 0 157px 60px;
-    background: rgb(47, 47, 51);
-    color: darkolivegreen;
+    margin: 0 20px;
+    background:burlywood;
+    color: rgb(29, 68, 63);
+    border: 1px solid burlywood;
+    border-radius: 10px;
+    box-shadow: 2px 3px 2px rgb(122, 103, 15);
 }
 button:focus{
     outline: none;
 }
-/*
-#new-game-form{
-    width: 400px;
-    height: 400px;
-    background: rgb(226, 233, 213);
-    margin: 0 auto;
-    display:block;
-    position: absolute;
-}
-#new-game-form{
-    display:none;
-}
-*/
-.display, #info-box{
+
+.display, .info-box{
     width: 250px;
     height: 100px;
     margin-top: 60px;
     text-align: center;
-    color: blanchedalmond;
+    color: rgb(218, 139, 22);
 
 }
 
@@ -85,14 +89,14 @@ button:focus{
 }
 
 #first-p{
-    color: rgb(45, 154, 187);
+    color: rgb(65, 201, 38);
     overflow: hidden;
     border-right: .15em solid orange;
     white-space: nowrap;
     margin: 10px auto;
     letter-spacing: .15em;
     animation: 
-    typing 3.5s steps(30, end),
+    typing 2.5s steps(30, end),
     blink-caret .5s step-end 5s forwards;
 }
 
@@ -105,12 +109,12 @@ button:focus{
     letter-spacing: .10em;
     opacity: 0;
     animation:
-    typing2 3.5s steps(30, end) 3.5s forwards,
+    typing2 2.5s steps(30, end) 3.5s forwards,
     blink-caret .5s step-end 10s forwards;
 }
 
 .p-highlight{
-    text-shadow: 1px 1px 8px rgba(255, 255, 255, 0.918);
+    text-shadow: 3px 6px 6px rgb(13, 31, 28);
 }
 
 @keyframes typing{
@@ -138,9 +142,10 @@ button:focus{
 input{
     margin: 5px auto;
     border-radius: 10px;
-    background: rgb(43, 54, 24);
+    background:rgb(29, 68, 63);
     border: 1px solid rgb(31, 39, 17);
 }
+
 
 #game-area{
     grid-area: game;
@@ -161,7 +166,7 @@ input{
 }
 
 .cell{
-    background:rgb(45, 45, 46);
+    background: rgb(54, 124, 115);
     color: burlywood;
     text-align: center;
     font-size: x-large;
@@ -170,9 +175,9 @@ input{
 }
 
 .grid-bottom{
-    border-bottom: 1px solid  rgb(192, 190, 190);
+    border-bottom: 6px solid rgb(29, 68, 63);
 }
 
 .grid-side{
-    border-right: 1px solid  rgb(192, 190, 190);;
+    border-right: 6px solid rgb(29, 68, 63);
 }
